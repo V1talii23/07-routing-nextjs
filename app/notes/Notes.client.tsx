@@ -18,7 +18,11 @@ function NotesClient() {
   const [searchNote, setSearchNote] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    const el = document.getElementById('modal');
+    if (!el) alert('Something went wrong! Try to create Note later.');
+    setIsModalOpen(true);
+  };
   const closeModal = () => setIsModalOpen(false);
 
   const handleSearch = useDebouncedCallback((note: string) => {

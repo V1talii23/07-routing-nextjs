@@ -1,16 +1,14 @@
 import css from './Modal.module.css';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
-import ErrorMsg from '@/app/notes/error';
 
 interface ModalProps {
   children: React.ReactNode;
   onClose: () => void;
-  error: Error;
 }
 
-function Modal({ children, onClose, error }: ModalProps) {
-  const ModalEl = document.getElementById('modal');
+function Modal({ children, onClose }: ModalProps) {
+  const modalEl = document.getElementById('modal');
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -24,9 +22,9 @@ function Modal({ children, onClose, error }: ModalProps) {
         onClose();
       }
     };
+
     document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
-    document.getElementById('modal')!.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
@@ -34,11 +32,9 @@ function Modal({ children, onClose, error }: ModalProps) {
     };
   }, [onClose]);
 
-  if (!ModalEl) {
-    return <ErrorMsg error={error} />;
-  }
+  if (!modalEl) return null;
 
-  if (ModalEl) {
+  if (modalEl) {
     return createPortal(
       <div
         onClick={handleBackdropClick}
@@ -46,10 +42,9 @@ function Modal({ children, onClose, error }: ModalProps) {
         role="dialog"
         aria-modal="true"
       >
-        <div className={css.modal}>{children}</div>
+        <div className={css.modal}>{children}</div>{' '}
       </div>,
-
-      ModalEl
+      modalEl
     );
   }
 }
