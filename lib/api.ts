@@ -12,19 +12,12 @@ interface HttpsResponse {
 axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 axios.defaults.headers.common['Authorization'] = `Bearer ${NOTES_KEY}`;
 
-const getNotes = async (search: string, page: number) => {
+const getNotes = async (search: string, page: number, tag?: string) => {
   const { data } = await axios.get<HttpsResponse>(URL, {
-    params: { page, perPage: 12, search },
+    params: { page, perPage: 12, search, tag },
   });
   return data;
 };
-
-// const getNotes = async () => {
-//   const { data } = await axios.get<HttpsResponse>(URL, {
-//     params: { perPage: 12 },
-//   });
-//   return data;
-// };
 
 const fetchNoteById = async (id: string) => {
   const { data } = await axios.get<Note>(`${URL}/${id}`);
