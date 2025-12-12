@@ -7,7 +7,7 @@ import css from './NoteList.module.css';
 import type { Note } from '@/types/note';
 import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
-import { KEY } from '@/app/notes/filter/[...slug]/page';
+import { KEY } from '@/types/constants';
 import { deleteNote } from '@/lib/api';
 
 interface NoteListProps {
