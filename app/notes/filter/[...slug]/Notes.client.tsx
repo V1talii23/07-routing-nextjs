@@ -13,7 +13,11 @@ import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
 import NoteList from '@/components/NoteList/NoteList';
 
-function NotesClient() {
+interface NotesClientProps {
+  tag?: string;
+}
+
+function NotesClient({ tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,11 +35,10 @@ function NotesClient() {
   }, 1000);
 
   const { data, isSuccess, error, isLoading } = useQuery({
-    queryKey: [KEY, search, page],
-    queryFn: () => getNotes(search, page),
-    staleTime: 60 * 1000,
+    queryKey: [KEY, search, page, tag],
+    queryFn: () => getNotes(search, page, tag),
     placeholderData: keepPreviousData,
-    refetchOnMount: false,
+    staleTime: 60 * 1000,
   });
 
   if (isLoading) return <p>Loading, please wait...</p>;

@@ -15,15 +15,8 @@ type FilteredNotesProps = {
 async function FilteredNotes({ searchParams, params }: FilteredNotesProps) {
   const { search, page } = await searchParams;
   const { slug } = await params;
-  // SAFELY extract tag
-  let tag: string | undefined = slug?.[0];
 
-  // "/notes/filter/all" OR no slug → get all notes
-  if (!tag || tag === 'all') {
-    tag = undefined;
-  }
-
-  //   const tag = slug[0] === 'all' ? undefined : slug[0];
+  const tag = slug[0] === 'all' ? undefined : slug[0];
 
   const queryClient = new QueryClient();
 
@@ -34,7 +27,7 @@ async function FilteredNotes({ searchParams, params }: FilteredNotesProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient />
+      <NotesClient tag={tag} />
     </HydrationBoundary>
   );
 }

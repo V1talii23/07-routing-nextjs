@@ -32,7 +32,7 @@ function NoteList({ notes }: NoteListProps) {
           <p className={css.content}>{note.content}</p>
           <div className={css.footer}>
             <span className={css.tag}>{note.tag}</span>
-            <Link className={css.link} href={`/notes/filter/${note.id}`}>
+            <Link className={css.link} href={`/notes/${note.id}`}>
               View details
             </Link>
             <button

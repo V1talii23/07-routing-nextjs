@@ -1,18 +1,18 @@
 import React from 'react';
 import css from './layout.module.css';
 
-interface FilteredNotesNotes {
+interface FilteredLayoutProps {
   children: React.ReactElement;
   sidebar: React.ReactElement;
 }
 
-function FilteredNotes({ children, sidebar }: FilteredNotesNotes) {
+function FilteredLayout({ children, sidebar }: FilteredLayoutProps) {
   return (
-    <div className={css.container}>
+    <section className={css.container}>
       <div className={css.sidebar}>{sidebar}</div>
       <div className={css.notesWrapper}>{children}</div>
-    </div>
+    </section>
   );
 }
 
-export default FilteredNotes;
+export default FilteredLayout;
