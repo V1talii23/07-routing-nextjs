@@ -13,6 +13,4 @@ interface CreateNoteData {
   tag: string;
 }
 
-type Tags = 'Work' | 'Personal' | 'Meetimg' | 'Shopping' | 'Todo';
-
-export type { Note, CreateNoteData, Tags };
+export type { Note, CreateNoteData };

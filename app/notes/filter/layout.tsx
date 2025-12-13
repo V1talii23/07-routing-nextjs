@@ -2,8 +2,8 @@ import React from 'react';
 import css from './layout.module.css';
 
 interface FilteredLayoutProps {
-  children: React.ReactElement;
-  sidebar: React.ReactElement;
+  children: React.ReactNode;
+  sidebar: React.ReactNode;
 }
 
 function FilteredLayout({ children, sidebar }: FilteredLayoutProps) {
