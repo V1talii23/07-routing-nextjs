@@ -4,24 +4,27 @@ import {
   HydrationBoundary,
 } from '@tanstack/react-query';
 import { getNoteById } from '@/lib/api';
-import NoteDetailsClient from './NoteDetails.client';
+import NotePreviewClient from './NotesPreview.client';
 
-type NoteDetailsProps = { params: Promise<{ id: string }> };
+interface NotePreviewProps {
+  params: Promise<{ id: string }>;
+}
 
-const NoteDetails = async ({ params }: NoteDetailsProps) => {
-  const { id } = await params;
+async function NotePreview({ params }: NotePreviewProps) {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  const { id } = await params;
+
+  queryClient.prefetchQuery({
     queryKey: ['note', id],
     queryFn: () => getNoteById(id),
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDetailsClient />
+      <NotePreviewClient id={id} />
     </HydrationBoundary>
   );
-};
+}
 
-export default NoteDetails;
+export default NotePreview;

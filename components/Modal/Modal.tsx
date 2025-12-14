@@ -1,3 +1,5 @@
+'use client';
+
 import css from './Modal.module.css';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
@@ -42,7 +44,7 @@ function Modal({ children, onClose }: ModalProps) {
         role="dialog"
         aria-modal="true"
       >
-        <div className={css.modal}>{children}</div>{' '}
+        <div className={css.modal}>{children}</div>
       </div>,
       modalEl
     );

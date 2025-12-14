@@ -1,12 +1,18 @@
 'use client';
 
-import css from './NoteDetails.module.css';
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import css from './NotePreview.module.css';
 import { getNoteById } from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import Modal from '@/components/Modal/Modal';
 
-function NoteDetailsClient() {
-  const { id } = useParams<{ id: string }>();
+interface NotePreviewClientProps {
+  id: string;
+}
+
+function NotePreviewClient({ id }: NotePreviewClientProps) {
+  const router = useRouter();
+  const close = () => router.back();
 
   const {
     data: note,
@@ -15,7 +21,6 @@ function NoteDetailsClient() {
   } = useQuery({
     queryKey: ['note', id],
     queryFn: () => getNoteById(id),
-    refetchOnMount: false,
   });
 
   const date = note?.updatedAt
@@ -27,16 +32,19 @@ function NoteDetailsClient() {
   if (error || !note) return <p>Something went wrong.</p>;
 
   return (
-    <div className={css.container}>
+    <Modal onClose={close}>
+      <button type="button" onClick={close} className={css.backBtn}>
+        Close
+      </button>
       <div className={css.item}>
         <div className={css.header}>
           <h2>{note?.title}</h2>
         </div>
-        <p className={css.content}>{note?.content}</p>
-
+        <p className={css.content}>{note.content}</p>
         <p className={css.date}>{date}</p>
       </div>
-    </div>
+    </Modal>
   );
 }
-export default NoteDetailsClient;
+
+export default NotePreviewClient;

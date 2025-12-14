@@ -1,4 +1,3 @@
-import React from 'react';
 import css from './layout.module.css';
 
 interface FilteredLayoutProps {
@@ -9,7 +8,7 @@ interface FilteredLayoutProps {
 function FilteredLayout({ children, sidebar }: FilteredLayoutProps) {
   return (
     <section className={css.container}>
-      <div className={css.sidebar}>{sidebar}</div>
+      <aside className={css.sidebar}>{sidebar}</aside>
       <div className={css.notesWrapper}>{children}</div>
     </section>
   );

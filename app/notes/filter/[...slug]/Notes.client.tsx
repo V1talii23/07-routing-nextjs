@@ -12,6 +12,8 @@ import Pagination from '@/components/Pagination/Pagination';
 import Modal from '@/components/Modal/Modal';
 import NoteForm from '@/components/NoteForm/NoteForm';
 import NoteList from '@/components/NoteList/NoteList';
+import Loader from '@/components/Loader/Loader';
+import Error from '@/components/Error/Error';
 
 interface NotesClientProps {
   tag?: string;
@@ -41,7 +43,9 @@ function NotesClient({ tag }: NotesClientProps) {
     staleTime: 60 * 1000,
   });
 
-  if (isLoading) return <p>Loading, please wait...</p>;
+  if (data && data?.notes.length < 1) return <Error />;
+
+  if (isLoading) return <Loader />;
 
   if (error || !data) return <p>Something went wrong.</p>;
 

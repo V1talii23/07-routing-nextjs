@@ -19,7 +19,7 @@ const getNotes = async (search: string, page: number, tag?: string) => {
   return data;
 };
 
-const fetchNoteById = async (id: string) => {
+const getNoteById = async (id: string) => {
   const { data } = await axios.get<Note>(`${URL}/${id}`);
   return data;
 };
@@ -34,4 +34,4 @@ const deleteNote = async (id: Note['id']) => {
   return res.data;
 };
 
-export { getNotes, createNote, deleteNote, fetchNoteById };
+export { getNotes, createNote, deleteNote, getNoteById };
