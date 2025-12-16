@@ -1,4 +1,4 @@
-function Error() {
+function ErrorMsg() {
   return <p>Something went wrong. Try later again!</p>;
 }
-export default Error;
+export default ErrorMsg;
